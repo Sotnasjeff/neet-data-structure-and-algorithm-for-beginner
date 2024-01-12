@@ -3,7 +3,8 @@ package arrays
 import "fmt"
 
 type Stack struct {
-	data []int
+	data     []int
+	minValue int
 }
 
 func (s *Stack) Push(value int) {
@@ -26,4 +27,18 @@ func (s *Stack) Peek() int {
 
 func (s *Stack) Top() int {
 	return s.data[0]
+}
+
+func (s *Stack) GetMin() int {
+	if len(s.data) == 1 {
+		return s.data[0]
+	}
+	size := len(s.data)
+	if s.minValue > s.data[size] && size >= 0 {
+		s.minValue = s.data[size]
+		size--
+		return s.GetMin()
+	}
+
+	return s.minValue
 }

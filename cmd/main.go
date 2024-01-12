@@ -18,14 +18,74 @@ func main() {
 
 	ops := []string{"5", "2", "C", "D", "+"}
 	fmt.Println(calPoints(ops))
+	fmt.Println(isAnagram("cacc", "ccaa"))
 
-	s := "{[]}"
+	s := "({}"
+
+	arr := []int{17, 18, 5, 4, 6, 1}
 
 	fmt.Println(isValid(s))
+	fmt.Println(replaceElements(arr))
+}
+
+func replaceElements(arr []int) []int {
+	lastElement := -1
+
+	for i := len(arr) - 1; i > -1; i-- {
+		greaterValue := max(lastElement, arr[i])
+		arr[i] = lastElement
+		lastElement = greaterValue
+	}
+
+	return arr
+}
+
+func isAnagram(s string, t string) bool {
+	hashMap := make(map[rune]int)
+
+	if len(s) != len(t) {
+		return false
+	}
+
+	for _, v := range s {
+		hashMap[v]++
+	}
+
+	for _, v := range t {
+		hashMap[v]--
+		if hashMap[v] < 0 {
+			return false
+		}
+	}
+
+	return true
 }
 
 func isValid(s string) bool {
-	return false
+	hashMap := map[rune]rune{
+		'{': '}',
+		'[': ']',
+		'(': ')',
+	}
+
+	if len(s) == 1 {
+		return false
+	}
+
+	array := []rune{}
+	for _, v := range s {
+		if _, b := hashMap[v]; b {
+			array = append(array, v)
+		} else if len(array) == 0 || hashMap[array[len(array)-1]] != v {
+			return false
+		} else {
+			array = array[:len(array)-1]
+		}
+
+	}
+
+	return len(array) == 0
+
 }
 
 func calPoints(operations []string) int {
