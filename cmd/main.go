@@ -26,6 +26,25 @@ func main() {
 
 	fmt.Println(isValid(s))
 	fmt.Println(replaceElements(arr))
+	fmt.Println(isSubsequence("b", "abc"))
+}
+
+func isSubsequence(s string, t string) bool {
+	array := []rune{}
+	for _, v := range s {
+		array = append(array, v)
+	}
+
+	j := len(array) - 1
+
+	for i := len(t) - 1; i > -1; i-- {
+		if len(array) != 0 && array[j] == rune(t[i]) {
+			array = array[:len(array)-1]
+			j = len(array) - 1
+		}
+	}
+
+	return len(array) == 0
 }
 
 func replaceElements(arr []int) []int {

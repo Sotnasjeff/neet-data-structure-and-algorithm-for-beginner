@@ -10,9 +10,6 @@ In order to run this code, you need to install go on your local machine
 
 PS: I'll be creating a Dockerfile to run this code without the need of installing Go locally.
 
-```
-Dar exemplos
-```
 
 ## ⚙️ Executing codes
 
