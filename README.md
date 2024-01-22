@@ -2,7 +2,7 @@
 
 This is a repo to implement some data structures and algorithm as well as exercises which I'm doing on Leetcode.
 
-### 📋 Pré-requisitos
+### 📋 Prerequirements
 
 In order to run this code, you need to install go on your local machine
 

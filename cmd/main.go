@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"strconv"
+
+	linkedlist "github.com/Sotnasjeff/neet-datastructure-and-algorithm-for-beginner/linked_list"
 )
 
 func main() {
@@ -16,6 +18,14 @@ func main() {
 	//fmt.Println(removeElement(array2, 1)) //1, {2,1,1}
 	//fmt.Println(removeElement(array3, 2)) //5, {0,1,3,0,4}
 
+	l := linkedlist.NewLinkedList()
+	l.InsertHead(10)
+	l.InsertTail(5)
+	l.InsertHead(6)
+
+	fmt.Println(l.GetValues())
+	fmt.Println(l.Get(1))
+
 	ops := []string{"5", "2", "C", "D", "+"}
 	fmt.Println(calPoints(ops))
 	fmt.Println(isAnagram("cacc", "ccaa"))
@@ -27,6 +37,74 @@ func main() {
 	fmt.Println(isValid(s))
 	fmt.Println(replaceElements(arr))
 	fmt.Println(isSubsequence("b", "abc"))
+
+	newNode := ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val:  4,
+				Next: nil,
+			},
+		},
+	}
+
+	newNode2 := ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 3,
+			Next: &ListNode{
+				Val:  4,
+				Next: nil,
+			},
+		},
+	}
+
+	fmt.Println(mergeTwoLists(&newNode, &newNode2))
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+	newLinkedList := &ListNode{}
+	tail := newLinkedList
+	for list1 != nil && list2 != nil {
+		if list1.Val < list2.Val {
+			tail.Next = list1
+			list1 = list1.Next
+		} else {
+			tail.Next = list2
+			list2 = list2.Next
+		}
+
+		tail = tail.Next
+	}
+
+	if list1 == nil {
+		tail.Next = list2
+	}
+
+	if list2 == nil {
+		tail.Next = list1
+	}
+
+	return newLinkedList.Next
+}
+
+func reverseList(head *ListNode) *ListNode {
+	curr := head
+	var prev *ListNode
+	for curr != nil {
+		next := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = next
+	}
+
+	return prev
 }
 
 func isSubsequence(s string, t string) bool {
